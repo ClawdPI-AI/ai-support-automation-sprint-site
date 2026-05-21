@@ -206,6 +206,12 @@
       margin-top: 28px;
     }
 
+    .cta-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 0;
+    }
+
     .copy-status {
       min-height: 20px;
       margin-top: 10px;
@@ -543,6 +549,7 @@
           <h1>Turn repeated support questions into governed AI workflows.</h1>
           <p class="lead">We clean up the support knowledge, configure safe automation, define human escalation, and leave your team with a measurable support workflow instead of an uncontrolled chatbot.</p>
           <div class="hero-actions">
+            <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml" target="_blank" rel="noopener">Open inquiry</a>
             <button class="button" type="button" data-copy-brief>Copy request brief</button>
             <a class="button secondary" href="#pricing">View pricing</a>
           </div>
@@ -684,7 +691,10 @@
           <h2>Request a short support automation teardown.</h2>
           <p>Send the support channel, help center, or current workflow you want reviewed. The first response will identify whether an audit or implementation sprint is the better next step.</p>
         </div>
-        <button class="button" type="button" data-copy-brief>Copy request brief</button>
+        <div class="cta-actions">
+          <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml" target="_blank" rel="noopener">Open inquiry</a>
+          <button class="button" type="button" data-copy-brief>Copy request brief</button>
+        </div>
       </div>
     </section>
   </main>
@@ -703,9 +713,12 @@
       "Current support stack:",
       "Approximate monthly support volume:",
       "Top repeated support questions:",
-      "Topics that must stay human-owned:",
+        "Topics that must stay human-owned:",
+        "",
+      "Please tell me whether a paid audit or implementation sprint is the better next step.",
       "",
-      "Please tell me whether a paid audit or implementation sprint is the better next step."
+      "Public inquiry form:",
+      "https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml"
     ].join("\n");
 
     const copyStatus = document.querySelector("[data-copy-status]");

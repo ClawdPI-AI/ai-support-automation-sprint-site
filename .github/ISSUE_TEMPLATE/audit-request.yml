@@ -1,0 +1,53 @@
+name: Support automation inquiry
+description: Request a support automation teardown or implementation fit check.
+title: "Support automation inquiry: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for legitimate business inquiries about a support automation audit or implementation sprint. Do not include payment details, credentials, private customer data, or sensitive account information.
+  - type: input
+    id: company
+    attributes:
+      label: Company
+      description: Your company or organization name.
+    validations:
+      required: true
+  - type: input
+    id: support_url
+    attributes:
+      label: Support or help-center URL
+      description: Public support, help-center, or workflow page if available.
+    validations:
+      required: false
+  - type: input
+    id: stack
+    attributes:
+      label: Current support stack
+      description: Help desk, chat, CRM, docs, or ecommerce platform.
+    validations:
+      required: false
+  - type: textarea
+    id: repeated_questions
+    attributes:
+      label: Repeated support questions
+      description: List the most common support questions or workflow bottlenecks.
+    validations:
+      required: true
+  - type: textarea
+    id: restricted_topics
+    attributes:
+      label: Topics that must stay human-owned
+      description: Refunds, disputes, regulated topics, complex cases, or policy-sensitive paths.
+    validations:
+      required: false
+  - type: dropdown
+    id: next_step
+    attributes:
+      label: Preferred next step
+      options:
+        - Paid audit fit check
+        - Implementation sprint fit check
+        - Not sure yet
+    validations:
+      required: true
