@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Support Automation Sprint</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --ink: #151817;
+      --muted: #59625f;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --line: #d9ded8;
+      --teal: #0d6f67;
+      --teal-dark: #084a46;
+      --amber: #b66a19;
+      --clay: #f0e6d8;
+      --green-soft: #e8f2ef;
+      --shadow: 0 14px 30px rgba(21, 24, 23, 0.08);
+      --radius: 6px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Verdana, Geneva, sans-serif;
+      line-height: 1.55;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(217, 222, 216, 0.9);
+      background: rgba(251, 250, 247, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 64px;
+    }
+
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--teal-dark);
+    }
+
+    .mark-symbol {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: Georgia, serif;
+      font-size: 15px;
+      color: var(--teal);
+      background: var(--green-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-dark);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--teal);
+      border-radius: var(--radius);
+      background: var(--teal);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus {
+      transform: translateY(-1px);
+      background: var(--teal-dark);
+      border-color: var(--teal-dark);
+      outline: none;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--teal-dark);
+      border-color: var(--line);
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus {
+      background: var(--green-soft);
+      border-color: var(--teal);
+    }
+
+    .hero {
+      padding: 74px 0 48px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(232, 242, 239, 0.85), rgba(251, 250, 247, 0.72)),
+        repeating-linear-gradient(0deg, rgba(21, 24, 23, 0.04) 0, rgba(21, 24, 23, 0.04) 1px, transparent 1px, transparent 42px),
+        repeating-linear-gradient(90deg, rgba(21, 24, 23, 0.035) 0, rgba(21, 24, 23, 0.035) 1px, transparent 1px, transparent 42px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin: 0 0 14px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0;
+      text-wrap: pretty;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 0.98;
+      max-width: 850px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 3.4vw, 44px);
+      line-height: 1.05;
+      margin: 0 0 12px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .copy-status {
+      min-height: 20px;
+      margin-top: 10px;
+      color: var(--teal-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .proof-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 34px;
+      max-width: 760px;
+    }
+
+    .proof {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.74);
+    }
+
+    .proof strong {
+      display: block;
+      font-size: 20px;
+      color: var(--teal-dark);
+      line-height: 1.1;
+    }
+
+    .proof span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .audit-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .audit-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    .audit-header span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .score {
+      display: grid;
+      gap: 12px;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 96px 1fr 36px;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .bar {
+      height: 8px;
+      background: #edf0ec;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: var(--teal);
+      border-radius: 999px;
+    }
+
+    .issue-list {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .issue-list li {
+      display: flex;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--teal-dark);
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(300px, 0.3fr);
+      gap: 32px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .section-intro p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      min-height: 100%;
+      box-shadow: 0 8px 18px rgba(21, 24, 23, 0.04);
+    }
+
+    .card p,
+    .step p,
+    .price-card p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: #fffaf2;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      counter-reset: steps;
+    }
+
+    .step {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .step::before {
+      counter-increment: steps;
+      content: counter(steps, decimal-leading-zero);
+      display: block;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .price-card.featured {
+      background: var(--green-soft);
+      border-color: rgba(13, 111, 103, 0.32);
+    }
+
+    .price {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 44px;
+      line-height: 1;
+      margin: 10px 0 16px;
+      color: var(--teal-dark);
+    }
+
+    .price small {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .includes {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .includes li {
+      display: flex;
+      gap: 8px;
+    }
+
+    .faq {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .cta {
+      background: var(--ink);
+      color: #fff;
+      border-bottom: none;
+    }
+
+    .cta .shell {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(260px, 0.3fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .cta p {
+      color: rgba(255, 255, 255, 0.78);
+      margin: 14px 0 0;
+    }
+
+    .cta .button {
+      background: #fff;
+      color: var(--teal-dark);
+      border-color: #fff;
+      width: 100%;
+    }
+
+    footer {
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 12px;
+      background: #f4f2ed;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .section-intro,
+      .pricing,
+      .cta .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-strip,
+      .grid-3,
+      .workflow,
+      .faq {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <div class="mark"><span class="mark-symbol">S</span> AI Support Sprint</div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#fit">Fit</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#questions">Questions</a>
+      </nav>
+      <button class="button" type="button" data-copy-brief>Copy request brief</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">10-business-day implementation for support teams</p>
+          <h1>Turn repeated support questions into governed AI workflows.</h1>
+          <p class="lead">We clean up the support knowledge, configure safe automation, define human escalation, and leave your team with a measurable support workflow instead of an uncontrolled chatbot.</p>
+          <div class="hero-actions">
+            <button class="button" type="button" data-copy-brief>Copy request brief</button>
+            <a class="button secondary" href="#pricing">View pricing</a>
+          </div>
+          <div class="copy-status" data-copy-status aria-live="polite"></div>
+          <div class="proof-strip" aria-label="Service proof points">
+            <div class="proof"><strong>20+</strong><span>support paths mapped before implementation</span></div>
+            <div class="proof"><strong>50-100</strong><span>QA prompts before launch</span></div>
+            <div class="proof"><strong>14 days</strong><span>post-launch fixes included</span></div>
+          </div>
+        </div>
+        <aside class="audit-panel" aria-label="Example audit panel">
+          <div class="audit-header">
+            <div>
+              <h3>Support Audit Snapshot</h3>
+              <span>Example structure used in the paid audit</span>
+            </div>
+            <span>v1</span>
+          </div>
+          <div class="score">
+            <div class="score-row"><span>FAQ coverage</span><div class="bar"><span style="width: 72%"></span></div><strong>72</strong></div>
+            <div class="score-row"><span>Safe automation</span><div class="bar"><span style="width: 64%"></span></div><strong>64</strong></div>
+            <div class="score-row"><span>Escalation clarity</span><div class="bar"><span style="width: 41%"></span></div><strong>41</strong></div>
+            <div class="score-row"><span>Reporting</span><div class="bar"><span style="width: 35%"></span></div><strong>35</strong></div>
+          </div>
+          <ul class="issue-list">
+            <li><span class="check">✓</span><span>Separate automatable questions from sensitive cases.</span></li>
+            <li><span class="check">✓</span><span>Bind answers to approved policy and help-center sources.</span></li>
+            <li><span class="check">✓</span><span>Measure unknown questions and handoff failures weekly.</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="fit">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">Where this fits</p>
+            <h2>Built for teams with real support pressure.</h2>
+          </div>
+          <p>Best fit is a team with repeated tickets, existing help content, and enough volume for operational improvement to matter.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <span class="tag">Ecommerce</span>
+            <h3>Shipping, returns, sizing, delays</h3>
+            <p>Turn repetitive order and policy questions into approved answers with clean escalation for disputes or sensitive issues.</p>
+          </article>
+          <article class="card">
+            <span class="tag">SaaS</span>
+            <h3>Setup, billing, troubleshooting</h3>
+            <p>Route technical questions, surface source docs, and identify knowledge gaps that should become help-center content.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Operations</span>
+            <h3>Multi-step customer workflows</h3>
+            <p>Map intent categories, approval rules, and handoff paths so agents are not rebuilding the same answer repeatedly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">Process</p>
+            <h2>No black-box launch.</h2>
+          </div>
+          <p>The sprint is designed around source-of-truth control, QA, and human escalation. Automation goes live only after the risky cases are named.</p>
+        </div>
+        <div class="workflow">
+          <article class="step"><h3>Audit</h3><p>Review support channels, repeated questions, macros, help-center gaps, and risk areas.</p></article>
+          <article class="step"><h3>Map</h3><p>Define automatable paths, restricted topics, owner approvals, and escalation rules.</p></article>
+          <article class="step"><h3>Build</h3><p>Configure workflows, answer sources, handoff triggers, QA prompts, and reporting.</p></article>
+          <article class="step"><h3>Launch</h3><p>Start with low-risk categories, monitor failures, and tune the system after real conversations.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">Pricing</p>
+            <h2>Start with an audit or move straight to implementation.</h2>
+          </div>
+          <p>No numeric outcome is promised before seeing the support operation. The audit exists when the scope needs to be proven first.</p>
+        </div>
+        <div class="pricing">
+          <article class="price-card">
+            <span class="tag">Paid audit</span>
+            <h3>Support automation teardown</h3>
+            <div class="price">$750 <small>credited toward sprint</small></div>
+            <p>For teams that want a scoped plan before implementation.</p>
+            <ul class="includes">
+              <li><span class="check">✓</span><span>Top 20 automation opportunities</span></li>
+              <li><span class="check">✓</span><span>Risk and escalation map</span></li>
+              <li><span class="check">✓</span><span>Recommended stack and rollout plan</span></li>
+            </ul>
+          </article>
+          <article class="price-card featured">
+            <span class="tag">Implementation</span>
+            <h3>AI Support Automation Sprint</h3>
+            <div class="price">$9,500 <small>10 business days</small></div>
+            <p>For teams ready to install a governed support workflow.</p>
+            <ul class="includes">
+              <li><span class="check">✓</span><span>Workflow map and knowledge cleanup plan</span></li>
+              <li><span class="check">✓</span><span>Assistant/workflow configuration on approved content</span></li>
+              <li><span class="check">✓</span><span>Escalation rules and QA test set</span></li>
+              <li><span class="check">✓</span><span>Launch handoff plus 14 days of fixes</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="questions">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">Questions buyers ask</p>
+            <h2>Clear boundaries before launch.</h2>
+          </div>
+        </div>
+        <div class="faq">
+          <article class="card"><h3>Will this replace support agents?</h3><p>No. It is designed to reduce repetitive work and route sensitive or complex issues to humans.</p></article>
+          <article class="card"><h3>Can you promise a fixed support-volume change?</h3><p>No fixed percentage is promised. We measure deflection, response time, handoff accuracy, and unknown questions after launch.</p></article>
+          <article class="card"><h3>What tools do you use?</h3><p>We prefer the existing help desk and knowledge tools when possible, then add only what the workflow requires.</p></article>
+          <article class="card"><h3>What is required from us?</h3><p>A named owner, approved policies, access to support materials, and clear rules for restricted or sensitive topics.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell">
+        <div>
+          <p class="eyebrow">Next step</p>
+          <h2>Request a short support automation teardown.</h2>
+          <p>Send the support channel, help center, or current workflow you want reviewed. The first response will identify whether an audit or implementation sprint is the better next step.</p>
+        </div>
+        <button class="button" type="button" data-copy-brief>Copy request brief</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">AI Support Automation Sprint. No numeric business outcome is promised. Work begins only after signed scope and legitimate invoice payment.</div>
+  </footer>
+  <script>
+    const teardownBrief = [
+      "Hi Sun,",
+      "",
+      "I am interested in a support automation teardown.",
+      "",
+      "Company:",
+      "Support/help center URL:",
+      "Current support stack:",
+      "Approximate monthly support volume:",
+      "Top repeated support questions:",
+      "Topics that must stay human-owned:",
+      "",
+      "Please tell me whether a paid audit or implementation sprint is the better next step."
+    ].join("\n");
+
+    const copyStatus = document.querySelector("[data-copy-status]");
+
+    function showCopyStatus(message) {
+      if (copyStatus) {
+        copyStatus.textContent = message;
+      }
+    }
+
+    async function copyBrief() {
+      try {
+        await navigator.clipboard.writeText(teardownBrief);
+        showCopyStatus("Request brief copied. Paste it into the verified business channel where we are already talking.");
+      } catch (error) {
+        showCopyStatus("Copy failed. Select and copy the request brief from your outreach packet instead.");
+      }
+    }
+
+    document.querySelectorAll("[data-copy-brief]").forEach((button) => {
+      button.addEventListener("click", copyBrief);
+    });
+  </script>
+</body>
+</html>
