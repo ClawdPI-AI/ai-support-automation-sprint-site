@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Mini-Teardowns | AI Support Automation Sprint</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --ink: #151817;
+      --muted: #59625f;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --line: #d9ded8;
+      --teal: #0d6f67;
+      --teal-dark: #084a46;
+      --amber: #b66a19;
+      --green-soft: #e8f2ef;
+      --warn-soft: #fff5e7;
+      --shadow: 0 12px 26px rgba(21, 24, 23, 0.07);
+      --radius: 6px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Verdana, Geneva, sans-serif;
+      line-height: 1.55;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.95);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--teal-dark);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .mark-symbol {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green-soft);
+      color: var(--teal);
+      font-family: Georgia, serif;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: var(--teal-dark); }
+
+    .button {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--teal);
+      border-radius: var(--radius);
+      background: var(--teal);
+      color: #fff;
+      padding: 0 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus {
+      background: var(--teal-dark);
+      border-color: var(--teal-dark);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--teal-dark);
+      border-color: var(--line);
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus {
+      background: var(--green-soft);
+      border-color: var(--teal);
+    }
+
+    .hero {
+      padding: 58px 0 36px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(232, 242, 239, 0.86), rgba(251, 250, 247, 0.74)),
+        repeating-linear-gradient(0deg, rgba(21, 24, 23, 0.04) 0, rgba(21, 24, 23, 0.04) 1px, transparent 1px, transparent 42px),
+        repeating-linear-gradient(90deg, rgba(21, 24, 23, 0.035) 0, rgba(21, 24, 23, 0.035) 1px, transparent 1px, transparent 42px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.68fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0;
+      text-wrap: pretty;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(38px, 5.2vw, 64px);
+      line-height: 1;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 3.3vw, 42px);
+      line-height: 1.08;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel,
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .panel p,
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: #fffaf2;
+    }
+
+    .note {
+      border: 1px solid rgba(182, 106, 25, 0.28);
+      border-radius: var(--radius);
+      background: var(--warn-soft);
+      color: #6f4a1f;
+      padding: 12px;
+      font-size: 13px;
+    }
+
+    .metric-grid,
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list li {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fcfcfa;
+      padding: 10px;
+    }
+
+    .source-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .source-chip {
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--teal-dark);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .quote {
+      border-left: 3px solid var(--teal);
+      padding-left: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card h3 a { text-decoration: none; }
+    .card h3 a:hover { color: var(--teal-dark); }
+
+    footer {
+      padding: 26px 0;
+      color: var(--muted);
+      font-size: 12px;
+      background: #f4f2ed;
+    }
+
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .hero-grid,
+      .metric-grid,
+      .content-grid,
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding-top: 44px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .button { transition: none; }
+    }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="mark" href="../index.html"><span class="mark-symbol">S</span> AI Support Sprint</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../index.html">Service</a>
+        <a href="../sample-audit.html">Sample audit</a>
+        <a href="../partner-pilot.html">Partner pilot</a>
+      </nav>
+      <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml" target="_blank" rel="noopener">Open inquiry</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Public/pre-sales samples</p>
+          <h1>Support automation mini-teardowns.</h1>
+          <p class="lead">These public samples show how a paid audit frames support paths, safe automation opportunities, and human-owned risk areas before implementation.</p>
+          <div class="actions">
+            <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml" target="_blank" rel="noopener">Request audit</a>
+            <a class="button secondary" href="../sample-audit.html">View sample audit</a>
+          </div>
+        </div>
+        <aside class="panel">
+          <span class="tag">Proof boundary</span>
+          <p>Every teardown here is prepared from public pages only. These are not paid client reports, measured performance claims, or proof of sale.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell card-grid">
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="freebird.html">Freebird</a></h3>
+          <p>Product compatibility, warranty, returns, SMS support, Gorgias QA and automation</p>
+          <div class="actions">
+            <a class="button secondary" href="freebird.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="ghost-lifestyle.html">GHOST Lifestyle</a></h3>
+          <p>Returns, order edits, damaged/missing items, delivered-not-received packages, multichannel support</p>
+          <div class="actions">
+            <a class="button secondary" href="ghost-lifestyle.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="lume-deodorant.html">Lume Deodorant</a></h3>
+          <p>Gorgias-hosted categories, product issue intake, subscription/order support, sensitive product escalation</p>
+          <div class="actions">
+            <a class="button secondary" href="lume-deodorant.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="centr.html">Centr</a></h3>
+          <p>App/subscription, equipment, warranty, billing platform handoffs, technical troubleshooting intake</p>
+          <div class="actions">
+            <a class="button secondary" href="centr.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="caitlyn-minimalist.html">Caitlyn Minimalist</a></h3>
+          <p>High-volume WISMO, personalization, gifting, product care, and sensitive escalation</p>
+          <div class="actions">
+            <a class="button secondary" href="caitlyn-minimalist.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="pepper.html">Pepper</a></h3>
+          <p>Fit guidance, product discovery, returns, multilingual support, and body-sensitive escalation</p>
+          <div class="actions">
+            <a class="button secondary" href="pepper.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="suitshop.html">SuitShop</a></h3>
+          <p>Online/showroom handoffs, event timing, returns, tailoring, group orders, and location-aware support</p>
+          <div class="actions">
+            <a class="button secondary" href="suitshop.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="psycho-bunny.html">Psycho Bunny</a></h3>
+          <p>Returns, BOPIS, promotions, shipping, chat/WhatsApp, and order escalation controls</p>
+          <div class="actions">
+            <a class="button secondary" href="psycho-bunny.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="createcx.html">CreateCX</a></h3>
+          <p>White-label ecommerce CX audits, QA test sets, implementation plans, and support workflow reporting</p>
+          <div class="actions">
+            <a class="button secondary" href="createcx.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="crescendo-ai.html">Crescendo.ai</a></h3>
+          <p>AI-native contact center positioning, human-agent blend, QA, implementation documentation, and partner delivery capacity</p>
+          <div class="actions">
+            <a class="button secondary" href="crescendo-ai.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="flux-agency.html">Flux Agency</a></h3>
+          <p>Shopify Plus/Gorgias implementation partner angle, post-launch support stack setup, QA, and client-ready audit packaging</p>
+          <div class="actions">
+            <a class="button secondary" href="flux-agency.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="graven-austin-drake.html">Graven Austin Drake</a></h3>
+          <p>Outsourced ecommerce support, live and AI-enabled chat, help desk services, QA test sets, and Gorgias workflow cleanup</p>
+          <div class="actions">
+            <a class="button secondary" href="graven-austin-drake.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="ltvplus.html">LTVplus</a></h3>
+          <p>White-label support automation audits, reporting templates, QA, and implementation overflow for ecommerce support clients</p>
+          <div class="actions">
+            <a class="button secondary" href="ltvplus.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="pomelo-client-brands.html">Pomelo / client brands</a></h3>
+          <p>Remote ecommerce CX staffing, Gorgias/Zendesk/macros/automations, KPI reporting, and client-brand support QA</p>
+          <div class="actions">
+            <a class="button secondary" href="pomelo-client-brands.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="talentpop.html">TalentPop</a></h3>
+          <p>Large ecommerce support agency partner angle, white-label audits, QA, Gorgias optimization, and client reporting workflows</p>
+          <div class="actions">
+            <a class="button secondary" href="talentpop.html">Open teardown</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Ready for manual review</span>
+          <h3><a href="yuma-ai.html">Yuma AI</a></h3>
+          <p>Ecommerce AI agent ecosystem, Gorgias/Zendesk/Shopify integrations, knowledge cleanup, QA, and automation health audits</p>
+          <div class="actions">
+            <a class="button secondary" href="yuma-ai.html">Open teardown</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">Public mini-teardown samples only. Work begins only after signed scope and legitimate invoice or platform payment.</div>
+  </footer>
+</body>
+</html>
