@@ -23,6 +23,15 @@ Service pages:
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/saas-support-automation-audit.html
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/white-label-ai-support-automation-audit.html
 
+Partner brief pages:
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/createcx.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/crescendo-ai.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/flux-agency.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/graven-austin-drake.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/ltvplus.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/talentpop.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/yuma-ai.html
+
 Public teardown examples:
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/caitlyn-minimalist.html
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/centr.html
