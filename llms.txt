@@ -28,6 +28,7 @@ Partner brief pages:
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/crescendo-ai.html
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/flux-agency.html
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/graven-austin-drake.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/index.html
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/ltvplus.html
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/talentpop.html
 - https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-briefs/yuma-ai.html

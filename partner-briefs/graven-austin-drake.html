@@ -216,6 +216,41 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
+    .brief-list {
+      display: grid;
+      gap: 14px;
+    }
+    .brief-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    .brief-row p { margin: 8px 0 0; color: var(--muted); }
+    .brief-row .actions { margin-top: 0; justify-content: flex-end; }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .metric {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .metric strong {
+      display: block;
+      color: var(--teal-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+    .metric span { color: var(--muted); font-size: 12px; }
     .list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
     .list li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; color: var(--muted); }
     .check { color: var(--teal); font-weight: 700; }
@@ -243,9 +278,10 @@
     .cta .button { background: #fff; border-color: #fff; color: var(--teal-dark); }
     footer { padding: 28px 0; color: var(--muted); font-size: 13px; }
     @media (max-width: 860px) {
-      .hero-grid, .section-grid, .cards { grid-template-columns: 1fr; }
+      .hero-grid, .section-grid, .cards, .metric-grid, .brief-row { grid-template-columns: 1fr; }
       .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
       .nav-links { flex-wrap: wrap; }
+      .brief-row .actions { justify-content: flex-start; }
     }
     @media (max-width: 560px) {
       .shell { width: min(100% - 22px, 1080px); }
@@ -261,6 +297,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="../services/index.html">Services</a>
         <a href="../partner-pilot.html">Partner pilot</a>
+        <a href="index.html">Briefs</a>
         <a href="../teardowns/index.html">Teardowns</a>
         <a href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=partner-pilot-request.yml&amp;title=Partner+pilot+request%3A+Graven+Austin+Drake" target="_blank" rel="noopener">Request pilot</a>
       </nav>
