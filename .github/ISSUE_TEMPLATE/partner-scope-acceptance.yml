@@ -1,0 +1,102 @@
+name: Partner scope acceptance
+description: Accept the USD 1,500 partner pilot audit scope for one client profile.
+title: "Partner scope acceptance: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form only after the partner pilot scope has been discussed in a real business thread. This is written scope acceptance, not a payment page. Do not include raw funds-routing details, credentials, private customer data, or sensitive account information.
+  - type: input
+    id: company
+    attributes:
+      label: Company or partner organization
+      description: Legal company name, partner organization, or marketplace contracting profile.
+    validations:
+      required: true
+  - type: input
+    id: accepter
+    attributes:
+      label: Accepting buyer name and role
+      description: Name and role or platform handle of the person accepting this scope.
+    validations:
+      required: true
+  - type: input
+    id: approval_owner
+    attributes:
+      label: Approval owner
+      description: Person or role that owns support-policy approval and client-facing decisions.
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Accepted scope
+      description: Confirm the bounded partner pilot audit scope.
+      options:
+        - USD 1,500 AI Support Automation Partner Pilot Audit for one client profile
+    validations:
+      required: true
+  - type: input
+    id: client_profile
+    attributes:
+      label: Client profile or support segment
+      description: The one client profile, ecommerce operation, support operation, or segment covered by this pilot.
+    validations:
+      required: true
+  - type: input
+    id: support_url
+    attributes:
+      label: Support or help-center URL
+      description: Public support, help-center, contact, FAQ, policy, or workflow page if available.
+    validations:
+      required: false
+  - type: input
+    id: stack
+    attributes:
+      label: Current support stack
+      description: Help desk, chat, CRM, docs, ecommerce platform, or support tools if known.
+    validations:
+      required: false
+  - type: textarea
+    id: repeated_questions
+    attributes:
+      label: Repeated support questions or pain points
+      description: List the support paths, repeated questions, workflow bottlenecks, or support risks the pilot should focus on.
+    validations:
+      required: true
+  - type: textarea
+    id: restricted_topics
+    attributes:
+      label: Topics that must stay human-owned
+      description: Refunds, disputes, regulated topics, complex cases, policy-sensitive paths, security, angry-customer handling, or approval boundaries.
+    validations:
+      required: true
+  - type: input
+    id: source_material
+    attributes:
+      label: Source material route
+      description: Public URLs, approved folder, platform thread, or business route where source material will be provided. Do not include credentials.
+    validations:
+      required: true
+  - type: input
+    id: contract_route
+    attributes:
+      label: Compliant contract or invoice route
+      description: Marketplace contract, platform contract, company invoice route, accounting route, or other compliant route. Do not include raw funds-routing details.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Acceptance confirmations
+      options:
+        - label: I accept the USD 1,500 AI Support Automation Partner Pilot Audit scope for the client profile listed above.
+          required: true
+        - label: I confirm the approval owner listed above owns support-policy approval and client-facing decisions for this scope.
+          required: true
+        - label: I understand work starts only after written acceptance, cleared payment through the compliant route, and receipt of agreed source material.
+          required: true
+        - label: I understand this pilot does not guarantee client conversion, revenue, ROI, profit, ticket-volume reduction, or testimonial outcomes.
+          required: true
+        - label: I have not included raw funds-routing details, credentials, private customer data, or sensitive account information in this public issue.
+          required: true

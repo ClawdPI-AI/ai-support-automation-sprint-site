@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner Scope Acceptance | AI Support Automation Sprint</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --ink: #151817;
+      --muted: #59625f;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --line: #d9ded8;
+      --teal: #0d6f67;
+      --teal-dark: #084a46;
+      --amber: #b66a19;
+      --clay: #f0e6d8;
+      --green-soft: #e8f2ef;
+      --shadow: 0 12px 26px rgba(21, 24, 23, 0.07);
+      --radius: 6px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Verdana, Geneva, sans-serif;
+      line-height: 1.55;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(217, 222, 216, 0.9);
+      background: rgba(251, 250, 247, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--teal-dark);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .mark-symbol {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green-soft);
+      color: var(--teal);
+      font-family: Georgia, serif;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-dark);
+    }
+
+    .button {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--teal);
+      border-radius: var(--radius);
+      background: var(--teal);
+      color: #fff;
+      padding: 0 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus {
+      background: var(--teal-dark);
+      border-color: var(--teal-dark);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--teal-dark);
+      border-color: var(--line);
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus {
+      background: var(--green-soft);
+      border-color: var(--teal);
+    }
+
+    .hero {
+      padding: 58px 0 36px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(232, 242, 239, 0.86), rgba(251, 250, 247, 0.74)),
+        repeating-linear-gradient(0deg, rgba(21, 24, 23, 0.04) 0, rgba(21, 24, 23, 0.04) 1px, transparent 1px, transparent 42px),
+        repeating-linear-gradient(90deg, rgba(21, 24, 23, 0.035) 0, rgba(21, 24, 23, 0.035) 1px, transparent 1px, transparent 42px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.68fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0;
+      text-wrap: pretty;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(38px, 5.2vw, 64px);
+      line-height: 1;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 3.3vw, 42px);
+      line-height: 1.08;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .actions {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel,
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .panel p,
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 12px;
+      border: 1px solid #c8d8d4;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--teal-dark);
+      padding: 4px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .summary {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 118px 1fr;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      font-size: 13px;
+    }
+
+    .summary-row strong {
+      color: var(--teal-dark);
+    }
+
+    .summary-row span {
+      color: var(--muted);
+    }
+
+    .section-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.7fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-intro p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .scope-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 9px;
+      color: var(--muted);
+    }
+
+    .check {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    .acceptance {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fdfdfb;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .cta {
+      background: var(--teal-dark);
+      color: #fff;
+    }
+
+    .cta .eyebrow,
+    .cta p {
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .cta .button {
+      background: #fff;
+      border-color: #fff;
+      color: var(--teal-dark);
+    }
+
+    .note {
+      margin-top: 18px;
+      border: 1px solid #e1c9a4;
+      border-radius: var(--radius);
+      background: #fff7e8;
+      color: #71440f;
+      padding: 14px 16px;
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .section-intro,
+      .scope-box,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        width: min(100% - 22px, 1080px);
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .summary-row {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="mark" href="index.html"><span class="mark-symbol">S</span> AI Support Sprint</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="partner-pilot.html">Partner pilot</a>
+        <a href="#terms">Terms</a>
+        <a href="#authority">Authority</a>
+        <a href="#accept">Accept scope</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Partner scope acceptance</p>
+          <h1>Accept the USD 1,500 partner pilot scope in writing.</h1>
+          <p class="lead">Use this route only after the scope has been discussed in a real business thread and the approval owner is ready to accept the bounded pilot for one client profile.</p>
+          <div class="actions">
+            <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=partner-scope-acceptance.yml" target="_blank" rel="noopener">Open scope acceptance form</a>
+            <a class="button secondary" href="partner-pilot.html">Review partner pilot</a>
+          </div>
+        </div>
+        <aside class="panel" aria-label="Acceptance guardrails">
+          <span class="tag">Acceptance guardrails</span>
+          <h3>This is not a payment page.</h3>
+          <p>The acceptance creates written scope proof for the agreed pilot. Payment must use a compliant marketplace, platform, contract, or invoice route, and no raw funds-routing details should be posted publicly.</p>
+          <div class="summary">
+            <div class="summary-row"><strong>Fee</strong><span>USD 1,500 for one agreed partner pilot audit.</span></div>
+            <div class="summary-row"><strong>Proof</strong><span>Issue URL or platform thread becomes written acceptance evidence.</span></div>
+            <div class="summary-row"><strong>Start</strong><span>Work starts after acceptance, cleared payment, and source materials.</span></div>
+            <div class="summary-row"><strong>Boundary</strong><span>No guaranteed conversion, revenue, ROI, or ticket reduction.</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="terms">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">Accepted scope</p>
+            <h2>One bounded audit for one client profile.</h2>
+          </div>
+          <p>The form captures the commercial facts needed before invoicing: contracting profile, client profile, approval owner, support sources, restricted topics, and the compliant invoice route.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <span class="tag">Deliverables</span>
+            <h3>Audit packet</h3>
+            <p>Partner-facing brief, client-ready support-path map, automation opportunity ranking, escalation rules, QA test set, and implementation recommendation.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Inputs</span>
+            <h3>Source material</h3>
+            <p>Support/help-center URL, approved support material, current stack if known, repeated support questions, restricted topics, and approval owner.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Timeline</span>
+            <h3>Five business days</h3>
+            <p>Delivery timing starts after written acceptance, cleared payment through a compliant route, and receipt of the agreed source material.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="authority">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">Before accepting</p>
+            <h2>The approval owner must be clear.</h2>
+          </div>
+          <p>Acceptance should come from someone authorized to approve the client profile, support-policy boundaries, source material, and the contract or invoice route.</p>
+        </div>
+        <div class="scope-box">
+          <article class="card">
+            <span class="tag">Required</span>
+            <ul class="list">
+              <li><span class="check">✓</span><span>Company or partner organization name.</span></li>
+              <li><span class="check">✓</span><span>Approval owner for support policy and client-facing decisions.</span></li>
+              <li><span class="check">✓</span><span>One client profile or support segment to scope.</span></li>
+              <li><span class="check">✓</span><span>Compliant marketplace, contract, platform, or invoice route.</span></li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag">Do not include</span>
+            <ul class="list">
+              <li><span class="check">✓</span><span>Raw funds-routing details, cards, wallets, or personal payment handles.</span></li>
+              <li><span class="check">✓</span><span>Credentials, private customer records, or unapproved client data.</span></li>
+              <li><span class="check">✓</span><span>Claims that the pilot guarantees client conversion, revenue, ROI, profit, or ticket-volume reduction.</span></li>
+              <li><span class="check">✓</span><span>Requests to move platform-required contracts or payments outside the platform.</span></li>
+            </ul>
+          </article>
+        </div>
+        <div class="note">A scope acceptance is invoice readiness, not revenue. Revenue is counted only after paid proof, direct-cost reconciliation, and a passing verifier.</div>
+      </div>
+    </section>
+
+    <section id="accept" class="cta">
+      <div class="shell">
+        <div>
+          <p class="eyebrow">Acceptance statement</p>
+          <h2>Confirm the exact pilot and approval owner.</h2>
+          <p>The form asks the buyer to confirm this statement with the client profile and approval owner filled in.</p>
+          <div class="acceptance">
+            <span>I accept the USD 1,500 AI Support Automation Partner Pilot Audit scope for [client profile/support segment], and I confirm [approval owner] owns support-policy approval.</span>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=partner-scope-acceptance.yml" target="_blank" rel="noopener">Open scope acceptance form</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">AI Support Automation Sprint. This page captures written scope acceptance only; it does not collect payment or request raw funds-routing details.</div>
+  </footer>
+</body>
+</html>
