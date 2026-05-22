@@ -1,0 +1,80 @@
+name: Partner pilot request
+description: Request a USD 1,500 partner pilot audit for one client profile.
+title: "Partner pilot request: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for a legitimate partner/channel request for one client profile. Do not include payment details, credentials, private customer data, or sensitive account information.
+  - type: input
+    id: company
+    attributes:
+      label: Company
+      description: Your company or partner organization name.
+    validations:
+      required: true
+  - type: dropdown
+    id: next_step
+    attributes:
+      label: Preferred next step
+      description: This template is for the partner pilot path.
+      options:
+        - Partner pilot audit (USD 1,500)
+    validations:
+      required: true
+  - type: input
+    id: scope_profile
+    attributes:
+      label: Company or client profile to scope
+      description: Name the client, segment, or anonymous client profile the pilot should cover.
+    validations:
+      required: true
+  - type: input
+    id: support_url
+    attributes:
+      label: Support or help-center URL
+      description: Public support, help-center, contact, FAQ, policy, or workflow page if available.
+    validations:
+      required: false
+  - type: input
+    id: stack
+    attributes:
+      label: Current support stack
+      description: Help desk, chat, CRM, docs, ecommerce platform, or support tools if known.
+    validations:
+      required: false
+  - type: textarea
+    id: repeated_questions
+    attributes:
+      label: Repeated support questions
+      description: List the repeated questions, workflow bottlenecks, or support paths the partner wants scoped.
+    validations:
+      required: true
+  - type: input
+    id: monthly_volume
+    attributes:
+      label: Approximate monthly support volume
+      description: Rough monthly tickets, chats, emails, calls, or inquiries if known.
+    validations:
+      required: false
+  - type: textarea
+    id: restricted_topics
+    attributes:
+      label: Topics that must stay human-owned
+      description: Refunds, disputes, regulated topics, complex cases, policy-sensitive paths, or approval boundaries.
+    validations:
+      required: true
+  - type: input
+    id: approval_owner
+    attributes:
+      label: Approval owner
+      description: Role or person who can approve support policy, source material, client-facing language, and scope.
+    validations:
+      required: true
+  - type: input
+    id: contract_route
+    attributes:
+      label: Preferred contract or invoice route
+      description: Platform contract, company invoice route, accounting route, or other compliant route. Do not include payment/account details.
+    validations:
+      required: true
