@@ -406,6 +406,70 @@
       margin-bottom: 20px;
     }
 
+    .artifact-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .artifact-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 8px 18px rgba(21, 24, 23, 0.04);
+    }
+
+    .artifact-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .artifact-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .mini-table {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .mini-row {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px;
+      background: #fcfcfa;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .mini-row strong {
+      color: var(--teal-dark);
+    }
+
+    .sample-note {
+      margin-top: 18px;
+      border: 1px solid rgba(182, 106, 25, 0.28);
+      border-radius: var(--radius);
+      background: #fffaf2;
+      padding: 12px;
+      color: #6f4a1f;
+      font-size: 13px;
+    }
+
     .pricing {
       display: grid;
       grid-template-columns: 0.92fr 1.08fr;
@@ -499,6 +563,7 @@
 
       .hero-grid,
       .section-intro,
+      .artifact-grid,
       .pricing,
       .cta .shell {
         grid-template-columns: 1fr;
@@ -534,6 +599,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#fit">Fit</a>
         <a href="#process">Process</a>
+        <a href="#output">Output</a>
         <a href="#pricing">Pricing</a>
         <a href="#questions">Questions</a>
       </nav>
@@ -550,6 +616,7 @@
           <p class="lead">We clean up the support knowledge, configure safe automation, define human escalation, and leave your team with a measurable support workflow instead of an uncontrolled chatbot.</p>
           <div class="hero-actions">
             <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml" target="_blank" rel="noopener">Open inquiry</a>
+            <a class="button secondary" href="sample-audit.html">View sample audit</a>
             <button class="button" type="button" data-copy-brief>Copy request brief</button>
             <a class="button secondary" href="#pricing">View pricing</a>
           </div>
@@ -626,6 +693,44 @@
           <article class="step"><h3>Map</h3><p>Define automatable paths, restricted topics, owner approvals, and escalation rules.</p></article>
           <article class="step"><h3>Build</h3><p>Configure workflows, answer sources, handoff triggers, QA prompts, and reporting.</p></article>
           <article class="step"><h3>Launch</h3><p>Start with low-risk categories, monitor failures, and tune the system after real conversations.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="output">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">Audit output</p>
+            <h2>What the buyer can inspect before implementation.</h2>
+          </div>
+          <p>The audit is not a strategy call. It produces concrete operating artifacts that can be approved, challenged, or handed to an implementation owner.</p>
+        </div>
+        <div class="artifact-grid">
+          <article class="artifact-panel">
+            <span class="tag">Paid audit deliverable</span>
+            <h3>Support-path map, risk rules, QA tests, and launch recommendation.</h3>
+            <ul class="artifact-list">
+              <li><span class="check">✓</span><span>Ranked support paths with source-of-truth status and automation risk.</span></li>
+              <li><span class="check">✓</span><span>Human escalation rules for refunds, disputes, account access, safety, and unclear policy cases.</span></li>
+              <li><span class="check">✓</span><span>Knowledge gaps that should be fixed before automation answers customers.</span></li>
+              <li><span class="check">✓</span><span>QA test plan covering common questions, edge cases, angry messages, restricted topics, and unknown questions.</span></li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button" href="sample-audit.html">View sample audit</a>
+              <a class="button secondary" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml" target="_blank" rel="noopener">Open inquiry</a>
+            </div>
+          </article>
+          <article class="artifact-panel">
+            <span class="tag">Decision gate</span>
+            <h3>The audit decides whether to build, wait, or clean up source material first.</h3>
+            <div class="mini-table" aria-label="Audit decision outputs">
+              <div class="mini-row"><strong>Proceed</strong><span>Approved source material exists, restricted-topic rules are clear, and QA can pass.</span></div>
+              <div class="mini-row"><strong>Limited pilot</strong><span>Only low-risk categories launch while sensitive paths remain human-owned.</span></div>
+              <div class="mini-row"><strong>Do not launch</strong><span>Policy gaps, missing owners, or unsafe handoff paths need cleanup first.</span></div>
+            </div>
+            <div class="sample-note">Sample materials are representative formats built from public/pre-sales signals. They are not paid client reports, performance claims, or revenue proof.</div>
+          </article>
         </div>
       </div>
     </section>
@@ -713,8 +818,10 @@
       "Current support stack:",
       "Approximate monthly support volume:",
       "Top repeated support questions:",
-        "Topics that must stay human-owned:",
-        "",
+      "Topics that must stay human-owned:",
+      "Sample audit page:",
+      "https://clawdpi-ai.github.io/ai-support-automation-sprint-site/sample-audit.html",
+      "",
       "Please tell me whether a paid audit or implementation sprint is the better next step.",
       "",
       "Public inquiry form:",
