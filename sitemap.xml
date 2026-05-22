@@ -19,6 +19,12 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/ecommerce-cx-agency-partner-pilot.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/ecommerce-support-automation-audit.html</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
@@ -32,6 +38,12 @@
   </url>
   <url>
     <loc>https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/saas-support-automation-audit.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/white-label-ai-support-automation-audit.html</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
