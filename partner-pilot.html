@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner Pilot Audit | AI Support Automation Sprint</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --ink: #151817;
+      --muted: #59625f;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --line: #d9ded8;
+      --teal: #0d6f67;
+      --teal-dark: #084a46;
+      --amber: #b66a19;
+      --clay: #f0e6d8;
+      --green-soft: #e8f2ef;
+      --shadow: 0 12px 26px rgba(21, 24, 23, 0.07);
+      --radius: 6px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Verdana, Geneva, sans-serif;
+      line-height: 1.55;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(217, 222, 216, 0.9);
+      background: rgba(251, 250, 247, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--teal-dark);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .mark-symbol {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green-soft);
+      color: var(--teal);
+      font-family: Georgia, serif;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-dark);
+    }
+
+    .button {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--teal);
+      border-radius: var(--radius);
+      background: var(--teal);
+      color: #fff;
+      padding: 0 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus {
+      background: var(--teal-dark);
+      border-color: var(--teal-dark);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--teal-dark);
+      border-color: var(--line);
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus {
+      background: var(--green-soft);
+      border-color: var(--teal);
+    }
+
+    .hero {
+      padding: 58px 0 36px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(232, 242, 239, 0.86), rgba(251, 250, 247, 0.74)),
+        repeating-linear-gradient(0deg, rgba(21, 24, 23, 0.04) 0, rgba(21, 24, 23, 0.04) 1px, transparent 1px, transparent 42px),
+        repeating-linear-gradient(90deg, rgba(21, 24, 23, 0.035) 0, rgba(21, 24, 23, 0.035) 1px, transparent 1px, transparent 42px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.68fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0;
+      text-wrap: pretty;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(38px, 5.2vw, 64px);
+      line-height: 1;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 3.3vw, 42px);
+      line-height: 1.08;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .actions {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel,
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .panel p,
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      margin-bottom: 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fffaf2;
+      color: var(--amber);
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .summary {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 118px 1fr;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .summary-row strong {
+      color: var(--ink);
+    }
+
+    .section-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.7fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 8px;
+    }
+
+    .check {
+      width: 18px;
+      height: 18px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--teal-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fcfcfa;
+      padding: 14px;
+    }
+
+    .step strong {
+      color: var(--teal-dark);
+      font-size: 13px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .scope-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .note {
+      border-left: 3px solid var(--amber);
+      background: #fffaf2;
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta {
+      background: var(--teal-dark);
+      color: #fff;
+    }
+
+    .cta .shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .cta p,
+    .cta .eyebrow {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .cta h2 {
+      color: #fff;
+    }
+
+    .cta .button {
+      background: #fff;
+      color: var(--teal-dark);
+      border-color: #fff;
+    }
+
+    footer {
+      padding: 22px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 820px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .hero-grid,
+      .section-intro,
+      .scope-box,
+      .cta .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .summary-row,
+      .step {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="mark" href="index.html"><span class="mark-symbol">S</span> AI Support Sprint</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="sample-audit.html">Sample audit</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#scope">Scope</a>
+        <a href="#request">Request</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Partner pilot audit</p>
+          <h1>A white-label support automation audit for one client profile.</h1>
+          <p class="lead">Built for CX agencies, ecommerce operators, and support consultants that need a client-ready audit before recommending automation or implementation work.</p>
+          <div class="actions">
+            <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml" target="_blank" rel="noopener">Open pilot inquiry</a>
+            <a class="button secondary" href="sample-audit.html">Inspect sample audit</a>
+          </div>
+        </div>
+        <aside class="panel" aria-label="Partner pilot terms">
+          <span class="tag">Pilot terms</span>
+          <h3>USD 1,500 for one agreed client profile.</h3>
+          <p>The pilot produces a partner-facing brief, client-ready audit structure, implementation scope, and QA plan. It does not promise client conversion, revenue, ROI, or ticket-volume reduction.</p>
+          <div class="summary">
+            <div class="summary-row"><strong>Turnaround</strong><span>Five business days after scope acceptance and source material.</span></div>
+            <div class="summary-row"><strong>Input</strong><span>Client profile, public support signals, known support pain, and restricted-topic rules.</span></div>
+            <div class="summary-row"><strong>Output</strong><span>Audit brief, risk map, QA test set, implementation recommendation.</span></div>
+            <div class="summary-row"><strong>Boundary</strong><span>No scraping of private customer data and no automation launch without client approval.</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="deliverables">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">What the partner gets</p>
+            <h2>A sellable audit packet, not a vague strategy note.</h2>
+          </div>
+          <p>The output is designed so a partner can review it internally, share the safe portions with a client, and decide whether implementation should proceed.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <span class="tag">Partner brief</span>
+            <h3>Client-fit argument</h3>
+            <p>Clear support automation angle, likely buyer owner, risk level, and recommended positioning for the partner's client conversation.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Audit map</span>
+            <h3>Support-path ranking</h3>
+            <p>Repeated support paths, source-of-truth gaps, safe automation candidates, and paths that should stay human-owned.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Implementation scope</span>
+            <h3>Build or wait decision</h3>
+            <p>QA tests, escalation rules, implementation backlog, and a recommendation to proceed, run a limited pilot, or clean up content first.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell scope-box">
+        <div>
+          <p class="eyebrow">Five-day workflow</p>
+          <h2>Structured enough to run repeatedly.</h2>
+        </div>
+        <div class="timeline">
+          <div class="step"><strong>Day 1</strong><p>Confirm client profile, support channels, help-center sources, risk boundaries, and buyer-facing use case.</p></div>
+          <div class="step"><strong>Day 2</strong><p>Map public support signals, repeated questions, likely source gaps, and escalation-sensitive topics.</p></div>
+          <div class="step"><strong>Day 3</strong><p>Draft automation opportunities, restricted-topic rules, and QA tests for common and edge-case requests.</p></div>
+          <div class="step"><strong>Day 4</strong><p>Package the partner-facing brief and client-ready audit deliverable with implementation options.</p></div>
+          <div class="step"><strong>Day 5</strong><p>Review changes, clarify risks, and finalize the implementation recommendation.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scope">
+      <div class="shell">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">Scope rules</p>
+            <h2>Commercially useful without overclaiming.</h2>
+          </div>
+          <p>The pilot is intentionally bounded: it helps a partner sell a scoped next step, but it does not invent client proof or handle payment outside a legitimate contract route.</p>
+        </div>
+        <div class="scope-box">
+          <article class="card">
+            <span class="tag">Included</span>
+            <ul class="list">
+              <li><span class="check">✓</span><span>One client profile or one ecommerce/support segment.</span></li>
+              <li><span class="check">✓</span><span>Partner-facing brief plus client-ready audit skeleton.</span></li>
+              <li><span class="check">✓</span><span>Automation risk rules, QA cases, and escalation handoff map.</span></li>
+              <li><span class="check">✓</span><span>Implementation recommendation with clear proceed/wait conditions.</span></li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag">Not included</span>
+            <ul class="list">
+              <li><span class="check">✓</span><span>No client-result claims, testimonials, or performance guarantees.</span></li>
+              <li><span class="check">✓</span><span>No access to private customer data unless the client contract explicitly permits it.</span></li>
+              <li><span class="check">✓</span><span>No live automation launch or customer-facing bot changes.</span></li>
+              <li><span class="check">✓</span><span>No public payment/account details in outreach, listings, or comments.</span></li>
+            </ul>
+          </article>
+        </div>
+        <div class="note">A partner pilot becomes revenue only after a written accepted scope, compliant invoice/payment route, cleared payment proof, direct-cost reconciliation, and a passing profit verifier.</div>
+      </div>
+    </section>
+
+    <section id="request" class="cta">
+      <div class="shell">
+        <div>
+          <p class="eyebrow">Request the pilot</p>
+          <h2>Send one client profile and the support problem you want scoped.</h2>
+          <p>Include the client type, support/help-center URLs, current support stack if known, restricted topics, and whether the output is for white-label, referral, or implementation scoping.</p>
+        </div>
+        <div class="actions">
+          <a class="button" href="https://github.com/ClawdPI-AI/ai-support-automation-sprint-site/issues/new?template=audit-request.yml" target="_blank" rel="noopener">Open pilot inquiry</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">AI Support Automation Sprint. No numeric business outcome is promised. Work begins only after signed scope and legitimate invoice payment.</div>
+  </footer>
+</body>
+</html>
