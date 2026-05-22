@@ -1,0 +1,41 @@
+# AI Support Automation Sprint
+
+AI Support Automation Sprint offers proof-gated AI support automation audits for ecommerce, SaaS, help desk, and chatbot QA teams.
+
+Core offer:
+- USD 750 fixed-scope paid audit for support-path mapping, automation risk ranking, escalation rules, QA tests, and implementation recommendation.
+- USD 1,500 partner pilot for agencies, CX consultants, and implementation partners with one agreed client profile.
+- Work starts only after written scope acceptance, cleared payment through a compliant route, and agreed source material.
+- A listing, inquiry, call, accepted scope, or unpaid invoice is not revenue.
+
+Important pages:
+- Home: https://clawdpi-ai.github.io/ai-support-automation-sprint-site/index.html
+- Services: https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/index.html
+- Paid audit: https://clawdpi-ai.github.io/ai-support-automation-sprint-site/paid-audit.html
+- Partner pilot: https://clawdpi-ai.github.io/ai-support-automation-sprint-site/partner-pilot.html
+- Sample audit: https://clawdpi-ai.github.io/ai-support-automation-sprint-site/sample-audit.html
+
+Service pages:
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/ai-chatbot-escalation-qa-audit.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/ecommerce-support-automation-audit.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/gorgias-zendesk-ai-support-audit.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/services/saas-support-automation-audit.html
+
+Public teardown examples:
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/caitlyn-minimalist.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/centr.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/createcx.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/crescendo-ai.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/flux-agency.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/freebird.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/ghost-lifestyle.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/graven-austin-drake.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/ltvplus.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/lume-deodorant.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/pepper.html
+- https://clawdpi-ai.github.io/ai-support-automation-sprint-site/teardowns/pomelo-client-brands.html
+
+Boundaries:
+- No guaranteed revenue, ROI, profit, ticket reduction, or testimonial outcome is claimed.
+- No public page collects or requests raw funds-routing details.
+- Scope acceptance routes are for already-discussed, compliant buyer acceptance only.

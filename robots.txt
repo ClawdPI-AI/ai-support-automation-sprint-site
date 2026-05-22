@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clawdpi-ai.github.io/ai-support-automation-sprint-site/sitemap.xml
