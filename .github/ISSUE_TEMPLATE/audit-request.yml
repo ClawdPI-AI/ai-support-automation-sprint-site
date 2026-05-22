@@ -1,16 +1,35 @@
 name: Support automation inquiry
-description: Request a support automation teardown or implementation fit check.
+description: Request a support automation audit, partner pilot, or implementation fit check.
 title: "Support automation inquiry: "
 body:
   - type: markdown
     attributes:
       value: |
-        Use this form for legitimate business inquiries about a support automation audit or implementation sprint. Do not include payment details, credentials, private customer data, or sensitive account information.
+        Use this form for legitimate business inquiries about a support automation audit, USD 1,500 partner pilot, or implementation sprint. Do not include payment details, credentials, private customer data, or sensitive account information.
   - type: input
     id: company
     attributes:
       label: Company
       description: Your company or organization name.
+    validations:
+      required: true
+  - type: dropdown
+    id: next_step
+    attributes:
+      label: Preferred next step
+      description: Choose the path that best matches the business need.
+      options:
+        - Partner pilot audit (USD 1,500)
+        - Paid audit fit check (USD 750)
+        - Implementation sprint fit check
+        - Not sure yet
+    validations:
+      required: true
+  - type: input
+    id: scope_profile
+    attributes:
+      label: Company or client profile to scope
+      description: For a partner pilot, name the client profile or segment; for a direct audit, repeat your own company/profile.
     validations:
       required: true
   - type: input
@@ -34,6 +53,13 @@ body:
       description: List the most common support questions or workflow bottlenecks.
     validations:
       required: true
+  - type: input
+    id: monthly_volume
+    attributes:
+      label: Approximate monthly support volume
+      description: Rough monthly tickets, chats, emails, or inquiries if known.
+    validations:
+      required: false
   - type: textarea
     id: restricted_topics
     attributes:
@@ -41,13 +67,17 @@ body:
       description: Refunds, disputes, regulated topics, complex cases, or policy-sensitive paths.
     validations:
       required: false
-  - type: dropdown
-    id: next_step
+  - type: input
+    id: approval_owner
     attributes:
-      label: Preferred next step
-      options:
-        - Paid audit fit check
-        - Implementation sprint fit check
-        - Not sure yet
+      label: Approval owner
+      description: Role or person who can approve support policy, source material, and scope.
     validations:
-      required: true
+      required: false
+  - type: input
+    id: contract_route
+    attributes:
+      label: Preferred contract or invoice route
+      description: Platform contract, company invoice route, or other compliant route. Do not include payment/account details.
+    validations:
+      required: false
